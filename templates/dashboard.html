@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="quiz-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">📝<br>Timed Quiz</div>
+            {% if session.get('logged_in') %}
+            <a href="/logout" class="submit-btn" style="width: 120px; margin: 18px 0 0 0; background: #e17055;">Logout</a>
+            {% endif %}
+        </aside>
+        <div class="container main-area">
+            <div class="header">Welcome, {{ username }}!</div>
+            <div class="card" style="text-align:center;">
+                <div style="font-size:1.2rem;margin-bottom:18px;">Your best score: <b style="color:#22577a;">{{ best }}</b></div>
+                <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:18px;">
+                    <a href="/start" class="submit-btn" style="width:180px;">Start Quiz</a>
+                    <a href="/profile" class="submit-btn" style="width:180px;background:#3a7ca5;">Profile</a>
+                    <a href="/leaderboard" class="submit-btn" style="width:180px;background:#22577a;">Leaderboard</a>
+                    <a href="/add" class="submit-btn" style="width:180px;background:#a7d7c5;color:#222;">Add Question</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="text-align:center; padding: 16px 0; color: #888; font-size: 1rem; background: none;">&copy; Prabesh Subedi</footer>
+</body>
+</html> 

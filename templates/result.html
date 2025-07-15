@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">🎉 Quiz Finished!</div>
+        <div class="score">Your Score: {{ score }}/{{ questions|length }}</div>
+        <div class="card">
+            <table class="summary-table">
+                <tr>
+                    <th>Q#</th>
+                    <th>Question</th>
+                    <th>Correct</th>
+                    <th>Your Answer</th>
+                </tr>
+                {% for i in range(questions|length) %}
+                <tr>
+                    <td>{{ i+1 }}</td>
+                    <td>{{ questions[i].question }}</td>
+                    <td>{{ questions[i].answer }}</td>
+                    {% if user_answers[i] == questions[i].answer %}
+                    <td class="correct">{{ user_answers[i] }}</td>
+                    {% elif user_answers[i] != 'Skipped' and user_answers[i] != 'Not attempted' %}
+                    <td class="wrong">{{ user_answers[i] }}</td>
+                    {% else %}
+                    <td>{{ user_answers[i] }}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% if session.get('logged_in') %}
+        <a href="/dashboard" class="submit-btn" style="width: 200px; margin: 24px auto 0 auto; display: block;">Back to Dashboard</a>
+        {% endif %}
+        {% if not session.get('logged_in') %}
+        <a href="/" class="submit-btn">Restart Quiz</a>
+        {% endif %}
+    </div>
+    <footer style="text-align:center; padding: 16px 0; color: #888; font-size: 1rem; background: none;">&copy; Prabesh Subedi</footer>
+</body>
+</html> 

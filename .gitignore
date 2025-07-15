@@ -1,0 +1,29 @@
+# Python bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+env/
+venv/
+ENV/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Flask instance folder (if used)
+instance/
+
+# VSCode settings (optional, if you use VSCode)
+.vscode/
+
+# Pytest cache
+.pytest_cache/
+
+# Ignore log files
+*.log
+logs/
+
+# Do NOT ignore your JSON data files (questions.json, users.json, leaderboard.json, user_history.json, etc.) 

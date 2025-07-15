@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="quiz-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">📝<br>Timed Quiz</div>
+            <a href="/" class="submit-btn" style="width: 120px; margin: 18px 0 0 0;">Back to Quiz</a>
+        </aside>
+        <div class="container main-area">
+            <div class="header">Login to Add Questions</div>
+            <div class="card">
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul class="flash-messages">
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+                <form method="POST" class="add-form">
+                    <label class="form-label">Username:</label>
+                    <input type="text" name="username" class="form-input" required autocomplete="username">
+                    <label class="form-label">Password:</label>
+                    <input type="password" name="password" class="form-input" required autocomplete="current-password">
+                    <button type="submit" class="submit-btn" style="margin-top:18px;">Log In</button>
+                </form>
+                <div style="text-align:center; margin-top:18px;">
+                    <span style="color:#555; font-size:1rem;">New user?</span>
+                    <a href="/register" class="submit-btn" style="width:120px; margin-top:8px; background:#22577a; display:inline-block; font-size:1rem;">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="text-align:center; padding: 16px 0; color: #888; font-size: 1rem; background: none;">&copy; Prabesh Subedi</footer>
+</body>
+</html> 

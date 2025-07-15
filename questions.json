@@ -1,0 +1,66 @@
+[
+  {
+    "question": "What is the capital of Nepal?",
+    "options": [
+      "A) Kathmandu",
+      "B) Pokhara",
+      "C) Lalitpur",
+      "D) Bhaktapur"
+    ],
+    "answer": "A"
+  },
+  {
+    "question": "Who developed Python?",
+    "options": [
+      "A) Elon Musk",
+      "B) Dennis Ritchie",
+      "C) Guido van Rossum",
+      "D) James Gosling"
+    ],
+    "answer": "C"
+  },
+  {
+    "question": "Which planet is known as the Red Planet?",
+    "options": [
+      "A) Earth",
+      "B) Mars",
+      "C) Venus",
+      "D) Jupiter"
+    ],
+    "answer": "B"
+  },
+  {
+    "question": "what is the capital of Australia",
+    "options": [
+      "A. Sydney",
+      "B. Melbourne",
+      "C. Canberra",
+      "D. Brisbane"
+    ],
+    "answer": "C"
+  },
+  {
+    "question": "Who is the Father of Computer",
+    "options": [
+      "A. Lady Augusta",
+      "B. Charles Babbage",
+      "C. Thomas Eddison",
+      "D. Jack henry"
+    ],
+    "answer": "B"
+  },
+  {
+    "question": "which software is this?",
+    "options": [
+      "A. bandicam"
+      ,
+      "B. voko"
+      ,
+      "C. obs"
+      ,
+      "D. capcutt"
+    ],
+    "answer": "B",
+    "video": "/static/uploads/Screencast_from_2025-07-04_15-50-43.webm"
+  }
+]

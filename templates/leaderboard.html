@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="quiz-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">📝<br>Timed Quiz</div>
+            {% if session.get('logged_in') %}
+            <a href="/logout" class="submit-btn" style="width: 120px; margin: 18px 0 0 0; background: #e17055;">Logout</a>
+            {% else %}
+            <a href="/" class="submit-btn" style="width: 120px; margin: 18px 0 0 0;">Back to Quiz</a>
+            {% endif %}
+        </aside>
+        <div class="container main-area">
+            <div class="header">Leaderboard</div>
+            {% if session.get('logged_in') %}
+            <a href="/dashboard" class="submit-btn" style="width: 160px; margin: 18px 0 0 0;">Back to Dashboard</a>
+            {% endif %}
+            <div class="card">
+                {% if not leaderboard %}
+                    <div style="text-align:center; color:#888; font-size:1.1rem;">No scores yet.</div>
+                {% else %}
+                    <table class="summary-table">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Username</th>
+                            <th>Score</th>
+                            <th>Date</th>
+                            {% if session.get('logged_in') %}<th>Action</th>{% endif %}
+                        </tr>
+                        {% for entry in leaderboard %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ entry.username }}</td>
+                            <td>{{ entry.score }}</td>
+                            <td>{{ entry.date }}</td>
+                            {% if session.get('logged_in') %}
+                            <td>
+                                {% if entry.username == session['username'] %}
+                                <form method="POST" action="/delete_leaderboard/{{ loop.index0 }}" style="display:inline;">
+                                    <button type="submit" class="submit-btn" style="background:#e17055;width:80px;padding:6px 0;font-size:0.95rem;">Delete</button>
+                                </form>
+                                {% endif %}
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <footer style="text-align:center; padding: 16px 0; color: #888; font-size: 1rem; background: none;">&copy; Prabesh Subedi</footer>
+</body>
+</html> 

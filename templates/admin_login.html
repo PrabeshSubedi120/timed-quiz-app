@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="quiz-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">📝<br>Timed Quiz</div>
+            <a href="/" class="submit-btn" style="width: 120px; margin: 18px 0 0 0;">Back to Quiz</a>
+        </aside>
+        <div class="container main-area">
+            <div class="header">Admin Login</div>
+            <div class="card">
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul class="flash-messages">
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+                <form method="POST" class="add-form">
+                    <label class="form-label">Username:</label>
+                    <input type="text" name="username" class="form-input" required autocomplete="username">
+                    <label class="form-label">Password:</label>
+                    <input type="password" name="password" class="form-input" required autocomplete="current-password">
+                    <button type="submit" class="submit-btn" style="margin-top:18px;">Admin Log In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer style="text-align:center; padding: 16px 0; color: #888; font-size: 1rem; background: none;">&copy; Prabesh Subedi</footer>
+</body>
+</html> 

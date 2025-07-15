@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Quiz Question</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="quiz-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">📝<br>Timed Quiz</div>
+            {% if session.get('logged_in') %}
+            <a href="/logout" class="submit-btn" style="width: 120px; margin: 18px 0 0 0; background: #e17055;">Logout</a>
+            {% else %}
+            <a href="/" class="submit-btn" style="width: 120px; margin: 18px 0 0 0;">Back to Quiz</a>
+            {% endif %}
+        </aside>
+        <div class="container main-area">
+            <div class="header">Add a New Question</div>
+            <a href="/dashboard" class="submit-btn" style="width: 160px; margin: 18px 0 0 0;">Back to Dashboard</a>
+            <div class="card">
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul class="flash-messages">
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+                <form method="POST" class="add-form" enctype="multipart/form-data">
+                    <label class="form-label">Question:</label>
+                    <input type="text" name="question" class="form-input" required>
+                    <label class="form-label">Add media:</label>
+                    <select id="media-type" class="form-input" onchange="showMediaField()">
+                        <option value="none">None</option>
+                        <option value="image">Image</option>
+                        <option value="audio">Audio</option>
+                        <option value="video">Video</option>
+                    </select>
+                    <input type="file" name="q_image" id="q_image" accept="image/*" class="form-input" style="display:none;">
+                    <input type="file" name="q_audio" id="q_audio" accept="audio/*" class="form-input" style="display:none;">
+                    <input type="file" name="q_video" id="q_video" accept="video/*" class="form-input" style="display:none;">
+                    <label class="form-label">Option A:</label>
+                    <input type="text" name="optionA" class="form-input" required>
+                    <a href="#" onclick="showOptImg('A');return false;" id="addAimg" style="color:#3a7ca5;font-size:0.98rem;">+ Add image</a>
+                    <input type="file" name="optA_img" id="optA_img" accept="image/*" class="form-input" style="display:none;">
+                    <label class="form-label">Option B:</label>
+                    <input type="text" name="optionB" class="form-input" required>
+                    <a href="#" onclick="showOptImg('B');return false;" id="addBimg" style="color:#3a7ca5;font-size:0.98rem;">+ Add image</a>
+                    <input type="file" name="optB_img" id="optB_img" accept="image/*" class="form-input" style="display:none;">
+                    <label class="form-label">Option C:</label>
+                    <input type="text" name="optionC" class="form-input" required>
+                    <a href="#" onclick="showOptImg('C');return false;" id="addCimg" style="color:#3a7ca5;font-size:0.98rem;">+ Add image</a>
+                    <input type="file" name="optC_img" id="optC_img" accept="image/*" class="form-input" style="display:none;">
+                    <label class="form-label">Option D:</label>
+                    <input type="text" name="optionD" class="form-input" required>
+                    <a href="#" onclick="showOptImg('D');return false;" id="addDimg" style="color:#3a7ca5;font-size:0.98rem;">+ Add image</a>
+                    <input type="file" name="optD_img" id="optD_img" accept="image/*" class="form-input" style="display:none;">
+                    <label class="form-label">Correct Answer:</label>
+                    <select name="answer" class="form-input" required>
+                        <option value="">Select</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                    <div style="color:#888;font-size:0.95rem;margin:8px 0 0 0;">Allowed file types: png, jpg, jpeg, gif, mp3, wav, mp4, webm, ogg</div>
+                    <button type="submit" class="submit-btn" style="margin-top:18px;">Add Question</button>
+                </form>
+                <script>
+                function showMediaField() {
+                    document.getElementById('q_image').style.display = 'none';
+                    document.getElementById('q_audio').style.display = 'none';
+                    document.getElementById('q_video').style.display = 'none';
+                    var val = document.getElementById('media-type').value;
+                    if (val === 'image') document.getElementById('q_image').style.display = 'block';
+                    if (val === 'audio') document.getElementById('q_audio').style.display = 'block';
+                    if (val === 'video') document.getElementById('q_video').style.display = 'block';
+                }
+                function showOptImg(opt) {
+                    document.getElementById('opt'+opt+'_img').style.display = 'block';
+                    document.getElementById('add'+opt+'img').style.display = 'none';
+                }
+                </script>
+            </div>
+        </div>
+    </div>
+    <footer style="text-align:center; padding: 16px 0; color: #888; font-size: 1rem; background: none;">&copy; Prabesh Subedi</footer>
+</body>
+</html> 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="quiz-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">📝<br>Timed Quiz</div>
+        </aside>
+        <div class="container main-area">
+            <div class="header">Question Feedback</div>
+            <div class="card" style="text-align:center;">
+                <div class="question">{{ question.question }}</div>
+                <div style="margin: 18px 0;">
+                    {% if feedback == 'correct' %}
+                        <div style="color:#2ecc71;font-size:1.3rem;font-weight:700;">✅ Correct!</div>
+                    {% elif feedback == 'wrong' %}
+                        <div style="color:#e17055;font-size:1.3rem;font-weight:700;">❌ Wrong!</div>
+                        <div style="margin-top:8px;">Your answer: <b>{{ selected }}</b></div>
+                    {% elif feedback == 'skipped' %}
+                        <div style="color:#e17055;font-size:1.3rem;font-weight:700;">⏰ Skipped!</div>
+                    {% endif %}
+                </div>
+                <div style="font-size:1.1rem;margin-bottom:18px;">Correct answer: <b style="color:#22577a;">{{ correct }}</b></div>
+                <form method="POST" action="/next/{{ next_qnum }}/{{ score }}">
+                    <button type="submit" class="submit-btn" style="width:180px;">Next Question</button>
+                </form>
+                <div style="margin-top:18px;color:#555;font-size:1rem;">Progress: {{ next_qnum-1 }}/{{ total }}</div>
+            </div>
+        </div>
+    </div>
+    <footer style="text-align:center; padding: 16px 0; color: #888; font-size: 1rem; background: none;">&copy; Prabesh Subedi</footer>
+</body>
+</html> 

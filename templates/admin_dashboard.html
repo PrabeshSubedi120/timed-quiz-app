@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="quiz-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">📝<br>Timed Quiz</div>
+            <a href="/admin_logout" class="submit-btn" style="width: 120px; margin: 18px 0 0 0; background: #e17055;">Admin Log out</a>
+        </aside>
+        <div class="container main-area">
+            <div class="header">Admin Dashboard</div>
+            <div class="card">
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul class="flash-messages">
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+                <div style="margin-bottom:18px;">
+                    <b>Total Quiz Questions:</b> {{ total_questions }}<br>
+                </div>
+                <div style="margin-bottom:18px;">
+                    <b>High Score Achiever(s):</b>
+                    {% if high_score_achievers %}
+                    <table class="summary-table" style="margin-top:8px;">
+                        <tr><th>Username</th><th>Score</th><th>Date</th></tr>
+                        {% for entry in high_score_achievers %}
+                        <tr>
+                            <td>{{ entry.username }}</td>
+                            <td>{{ entry.score }}</td>
+                            <td>{{ entry.date }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    {% else %}
+                    <span style="color:#888;">No scores yet.</span>
+                    {% endif %}
+                </div>
+                <h3>Registered Users</h3>
+                <table class="summary-table">
+                    <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Actions</th>
+                    </tr>
+                    {% for user in users.keys() %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ user }}</td>
+                        <td>
+                            {% if user != 'admin' %}
+                            <a href="/admin_edit_user/{{ user }}" class="submit-btn" style="width:70px;display:inline-block;padding:6px 0;font-size:0.95rem;margin-right:6px;">Edit</a>
+                            <form method="POST" action="/admin_delete_user/{{ user }}" style="display:inline;">
+                                <button type="submit" class="submit-btn" style="width:70px;display:inline-block;padding:6px 0;font-size:0.95rem;background:#e17055;">Delete</button>
+                            </form>
+                            {% else %}
+                            <span style="color:#aaa;font-size:0.95rem;">(admin)</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer style="text-align:center; padding: 16px 0; color: #888; font-size: 1rem; background: none;">&copy; Prabesh Subedi</footer>
+</body>
+</html> 

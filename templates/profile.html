@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="quiz-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">📝<br>Timed Quiz</div>
+            {% if session.get('logged_in') %}
+            <a href="/logout" class="submit-btn" style="width: 120px; margin: 18px 0 0 0; background: #e17055;">Logout</a>
+            {% else %}
+            <a href="/" class="submit-btn" style="width: 120px; margin: 18px 0 0 0;">Back to Quiz</a>
+            {% endif %}
+        </aside>
+        <div class="container main-area">
+            <div class="header">Your Profile</div>
+            <a href="/dashboard" class="submit-btn" style="width: 160px; margin: 18px 0 0 0;">Back to Dashboard</a>
+            <div class="card">
+                {% if not history %}
+                    <div style="text-align:center; color:#888; font-size:1.1rem;">No quiz attempts yet.</div>
+                {% else %}
+                    <div style="margin-bottom:18px;">
+                        <b>Best Score:</b> {{ stats.best }}<br>
+                        <b>Average Score:</b> {{ stats.avg }}<br>
+                        {% if stats.most_missed %}
+                        <b>Most Missed Questions:</b>
+                        <ul style="margin:8px 0 0 18px;">
+                            {% for q, count in stats.most_missed %}
+                            <li>{{ q }} <span style="color:#e17055;">({{ count }} times)</span></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <h3>Your Quiz Attempts</h3>
+                    <table class="summary-table">
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Score</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for h in history|reverse %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ h.date }}</td>
+                            <td>{{ h.score }}/{{ h.questions|length }}</td>
+                            <td>
+                                <form method="POST" action="/delete_history/{{ loop.index0 }}" style="display:inline;">
+                                    <button type="submit" class="submit-btn" style="background:#e17055;width:80px;padding:6px 0;font-size:0.95rem;">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <footer style="text-align:center; padding: 16px 0; color: #888; font-size: 1rem; background: none;">&copy; Prabesh Subedi</footer>
+</body>
+</html> 
