@@ -24,7 +24,7 @@ A modern, feature-rich Flask web application for timed quizzes with user managem
 - **Responsive UI**: Modern design with glassmorphism, overlays, and context-aware navigation.
 
 ### Admin Features
-- **Admin Login & Dashboard**: Secure admin access.
+- **Admin Login & Dashboard**: Secure admin access.(username:admin  passworrd:admin123 can be set from app.py) 
 - **User Management**: View, edit, and delete users.
 - **Quiz Management**: View total questions, high score achievers.
 - **Recent Activity**: See 5 most recent quiz attempts (user, score, date).
