@@ -71,9 +71,8 @@ TIMED_QUIZ/
 
 3. **Install dependencies:**
    ```bash
-   pip install flask werkzeug
+   pip install -r requirements.txt
    ```
-   (Add any other dependencies you use)
 
 4. **Run the application:**
    ```bash
