@@ -99,4 +99,4 @@ TIMED_QUIZ/
 ---
 
 ## License
-MIT License (or specify your license here) 
+MIT License 
